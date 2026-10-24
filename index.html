@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZenithRazor — Coder & Developer</title>
+<meta name="description" content="ZenithRazor is a coder and developer building Discord bots, hosting and cloud infrastructure. Head of Artics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff4b8; --card:#fffdf0; --ink:#1d1906; --muted:#4d4513; --edge:#1d1906; --accent:#ffd60a; --accent-ink:#1d1906; --link:#6b5200; --panel:#1d1906; --panel-ink:#fff4c2;
+  --head:"Unbounded","Trebuchet MS",system-ui,sans-serif; --body:"Manrope","Segoe UI",system-ui,sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12100a;--card:#1d1a0e;--ink:#fff4c2;--muted:#d6c982;--edge:#ffd60a;--link:#ffd60a;--panel:#070600;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12100a;--card:#1d1a0e;--ink:#fff4c2;--muted:#d6c982;--edge:#ffd60a;--link:#ffd60a;--panel:#070600;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);min-height:100vh}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:5px;width:0;background:var(--ink);z-index:9}
+.wrap{max-width:1060px;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--head);line-height:1.15;margin:0;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(1.5rem,3.8vw,2.4rem);margin-bottom:.8rem}
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;position:relative}
+.logo{font:800 1.1rem var(--head);text-decoration:none;background:var(--accent);color:var(--accent-ink);padding:.15rem .6rem;border:2px solid var(--edge);border-radius:8px}
+.inline a{margin-right:1.3rem;text-decoration:none;font-weight:700;padding-bottom:3px;border-bottom:3px solid transparent}
+.inline a:hover{border-color:var(--edge)}
+.inline a[aria-current="page"]{border-color:var(--ink);background:linear-gradient(transparent 60%,var(--accent) 60%)}
+.right{display:flex;align-items:center;gap:.5rem}
+.ib{width:44px;height:44px;border-radius:12px;border:2px solid var(--edge);background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;box-shadow:3px 3px 0 var(--edge)}
+.ib:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--edge)}
+.ib svg{width:22px;height:22px;fill:currentColor}
+.menu{position:absolute;right:0;top:calc(100% + 6px);min-width:230px;background:var(--panel);color:var(--panel-ink);border:2px solid var(--accent);border-radius:14px;padding:.5rem;z-index:8;box-shadow:6px 6px 0 var(--accent);animation:pop .2s ease-out}
+.menu[hidden]{display:none}
+.menu a{display:block;padding:.6rem .9rem;border-radius:9px;text-decoration:none;font-weight:500}
+.menu a:hover,.menu a[aria-current="page"]{background:var(--accent);color:#1d1906}
+.menu hr{border:0;border-top:1px solid rgba(255,214,10,.35);margin:.4rem 0}
+@keyframes pop{from{opacity:0;transform:scale(.94)}}
+.view{padding:2rem 0 4.5rem}.view[hidden]{display:none}
+.view.enter{animation:enter .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes enter{from{opacity:0;transform:translateY(16px)}}
+.sub{color:var(--muted);max-width:38rem;margin:0 0 2rem}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:center;padding-top:1rem}
+.hero h1{font-size:clamp(1.9rem,5.4vw,3.8rem)}
+.w{display:inline-block;animation:rise .85s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*70ms)}
+@keyframes rise{from{opacity:0;transform:translateY(.7em) rotate(3deg)}}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);border:2px solid var(--edge);border-radius:999px;padding:.25rem .9rem;font-weight:700;font-size:.95rem;margin-bottom:1.25rem}
+.badge::before,.up::before{content:"";width:9px;height:9px;border-radius:50%;background:#16a34a;animation:pulse 2s ease-in-out infinite;display:inline-block}
+.up::before{margin-right:.5rem;background:#34d399}
+@keyframes pulse{50%{opacity:.25}}
+.lead{font-size:1.2rem;color:var(--muted);max-width:34rem;margin:1.25rem 0 1.75rem}
+.btns{display:flex;flex-wrap:wrap;gap:.9rem}
+.btn{display:inline-block;padding:.75rem 1.4rem;border-radius:12px;font-weight:700;text-decoration:none;border:2px solid var(--edge);background:var(--card);box-shadow:4px 4px 0 var(--edge);transition:transform .15s,box-shadow .15s}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--edge)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--edge)}
+.term{background:var(--panel);color:var(--panel-ink);border:2px solid var(--edge);border-radius:14px;padding:1.1rem 1.25rem;font:400 .95rem/1.9 ui-monospace,Menlo,Consolas,monospace;box-shadow:8px 8px 0 var(--edge)}
+.term .bar{display:flex;gap:6px;margin-bottom:.6rem}.term .bar i{width:11px;height:11px;border-radius:50%;background:var(--accent)}
+.term .row{display:flex;justify-content:space-between;gap:1rem}.up{color:#34d399}
+.tape{height:16px;background:repeating-linear-gradient(-45deg,var(--ink) 0 14px,var(--accent) 14px 28px);border-block:2px solid var(--edge)}
+.ticker{overflow:hidden;border-block:2px solid var(--edge);margin-top:3.5rem;padding:.8rem 0;background:var(--accent);color:var(--accent-ink)}
+.ticker div{display:flex;gap:2.5rem;width:max-content;animation:slide 30s linear infinite;font:800 1.05rem var(--head)}
+@keyframes slide{to{transform:translateX(-50%)}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card,.job{background:var(--card);border:2px solid var(--edge);border-radius:14px;padding:1.5rem;box-shadow:6px 6px 0 var(--edge)}
+.card h3{font-size:1.1rem;margin-bottom:.5rem}.card p,.job p{margin:.4rem 0;color:var(--muted)}
+.card ul{margin:.6rem 0 0;padding-left:1.1rem;color:var(--muted)}
+.card.y{background:var(--accent);color:var(--accent-ink)}.card.y p{color:var(--accent-ink)}
+a.card{text-decoration:none;display:block;transition:transform .15s}a.card:hover{transform:translate(-3px,-3px)}
+.job{padding:1.75rem}.job header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem 1rem;align-items:baseline;margin-bottom:.6rem}
+.job h3{font-size:1.6rem}.role{background:var(--accent);color:var(--accent-ink);font-weight:700;padding:.1rem .7rem;border:2px solid var(--edge);border-radius:999px}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;padding:0;list-style:none}
+.tags li{border:2px solid var(--edge);border-radius:999px;padding:.15rem .85rem;font-weight:500;background:var(--card)}
+.steps{display:grid;gap:1.1rem;padding:0;list-style:none;margin:2.5rem 0 0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:3.4rem 1fr;gap:1rem}
+.steps li::before{content:counter(s);width:3rem;height:3rem;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);border:2px solid var(--edge);border-radius:50%;font:800 1.4rem var(--head)}
+.steps b{font:800 1.05rem var(--head)}.steps span{display:block;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:1.2rem 3rem;margin:2.5rem 0 0}
+.stats b{display:block;font:800 clamp(1.8rem,4.6vw,2.7rem) var(--head);line-height:1}.stats span{color:var(--muted)}
+.cta{margin-top:3.5rem;background:var(--ink);color:var(--bg);border-radius:16px;overflow:hidden;border:2px solid var(--edge)}
+.cta .in{padding:2rem}.cta h2{margin-bottom:.4rem}.cta p{margin:0 0 1.25rem;opacity:.85}
+.cta .btn{border-color:var(--accent);box-shadow:4px 4px 0 var(--accent)}
+.mail{font:800 clamp(1.1rem,3.6vw,2rem) var(--head);overflow-wrap:anywhere;text-underline-offset:7px;text-decoration-thickness:4px;text-decoration-color:var(--accent);display:block;margin:.5rem 0 1.5rem}
+form{display:grid;gap:.9rem;margin-top:1rem}
+label{font-weight:700;display:grid;gap:.3rem}
+input,textarea{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--edge);border-radius:10px;padding:.7rem .9rem;width:100%}
+textarea{min-height:130px;resize:vertical}
+details{background:var(--card);border:2px solid var(--edge);border-radius:12px;padding:.9rem 1.2rem;margin-bottom:.8rem}
+summary{font:800 .95rem var(--head);cursor:pointer}details p{margin:.6rem 0 0;color:var(--muted)}
+footer{padding:2rem 0 3rem;color:var(--muted);border-top:2px solid var(--edge);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+@media (max-width:820px){.hero,.grid,.g3,.g4{grid-template-columns:1fr}.inline{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas><div id="bar"></div>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#home">ZenithRazor</a>
+    <div class="right">
+      <nav class="inline" aria-label="Main"><a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#artics">Artics</a><a href="#contact">Contact</a></nav>
+      <button class="ib" id="theme" aria-label="Switch light and dark theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18V3z"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <button class="ib" id="dots" aria-label="Open menu" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+    </div>
+    <div class="menu" id="menu" hidden>
+      <a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#artics">Artics</a><a href="#contact">Contact</a><hr>
+      <a href="https://github.com/zenithrazor" target="_blank" rel="noopener">GitHub</a><a href="https://discord.gg/articsind" target="_blank" rel="noopener">Artics Discord</a><a href="mailto:contact@zenithrazor.com">Email</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="view" data-route="home" hidden>
+      <div class="hero">
+        <div>
+          <span class="badge">Available for select engagements</span>
+          <h1 data-split>Coder &amp; developer building what keeps communities online.</h1>
+          <p class="lead">I’m ZenithRazor. I build Discord bots, server systems, and cloud hosting for communities and businesses worldwide, and I’m Head of Artics.</p>
+          <div class="btns"><a class="btn primary" href="#contact">Start a project</a><a class="btn" href="#work">See what I build</a><a class="btn" href="#artics">Meet Artics</a></div>
+        </div>
+        <div class="term" role="img" aria-label="Status panel listing services as running">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="row"><span>discord-bots</span><span class="up">running</span></div>
+          <div class="row"><span>hosting</span><span class="up">running</span></div>
+          <div class="row"><span>cloud-infra</span><span class="up">running</span></div>
+          <div class="row"><span>artics</span><span class="up">running</span></div>
+        </div>
+      </div>
+      <div class="stats"><div><b data-n="4">4</b><span>core disciplines</span></div><div><b data-n="24">24</b><span>hours a day, uptime first</span></div><div><b data-n="3">3</b><span>Artics services</span></div></div>
+      <div class="ticker" aria-hidden="true"><div>
+        <span>Discord bots</span><span>Server architecture</span><span>Hosting</span><span>Cloud infrastructure</span><span>Operations</span><span>Influencer marketing</span>
+        <span>Discord bots</span><span>Server architecture</span><span>Hosting</span><span>Cloud infrastructure</span><span>Operations</span><span>Influencer marketing</span>
+      </div></div>
+      <h2 style="margin-top:3.5rem">What I can do for you</h2>
+      <div class="grid g4" style="margin-top:1.4rem">
+        <a class="card" href="#work"><h3>Bots</h3><p>Moderation, tickets, economy, integrations.</p></a>
+        <a class="card" href="#work"><h3>Hosting</h3><p>Online around the clock, monitored.</p></a>
+        <a class="card" href="#work"><h3>Cloud</h3><p>From one instance to many.</p></a>
+        <a class="card y" href="#artics"><h3>Artics</h3><p>Creator-first influencer marketing.</p></a>
+      </div>
+      <div class="cta"><div class="tape"></div><div class="in"><h2>Got a project that needs to stay online?</h2><p>Tell me what you’re building and I’ll reply by email.</p><a class="btn primary" href="#contact">Get in touch</a></div></div>
+    </section>
+
+    <section class="view" data-route="about" hidden>
+      <h2>I work at the layer most people never see.</h2>
+      <p class="sub">The bot that keeps roles in sync, the server that stays online at 3am, the pipeline that moves a deal from first message to signed contract. That layer is where I operate.</p>
+      <div class="grid g3">
+        <div class="card y"><h3>Who I am</h3><p>ZenithRazor, a coder and developer. I design bots, servers, and hosting for communities and businesses, and I lead Artics.</p></div>
+        <div class="card"><h3>How I think</h3><p>Uptime comes first. I build things to stay online without babysitting.</p></div>
+        <div class="card"><h3>How I lead</h3><p>Clear structure, clear roles, and workflows people can follow and hand over.</p></div>
+      </div>
+      <ol class="steps">
+        <li><div><b>Plan the structure</b><span>Roles, permissions, hosting and scale are decided before the first line of code.</span></div></li>
+        <li><div><b>Build and deploy</b><span>Bots and services ship through a pipeline, not by hand.</span></div></li>
+        <li><div><b>Keep it running</b><span>Monitoring, process management, and a plan to grow from one instance to many.</span></div></li>
+      </ol>
+      <ul class="tags" style="margin-top:2.5rem" aria-label="Skills"><li>Discord bots</li><li>Server architecture</li><li>Hosting</li><li>Cloud infrastructure</li><li>Team operations</li><li>Partner management</li></ul>
+    </section>
+
+    <section class="view" data-route="work" hidden>
+      <h2>What I build</h2>
+      <p class="sub">Four disciplines, one operator. Each one supports the others.</p>
+      <div class="grid">
+        <div class="card y"><h3>Discord bots &amp; servers</h3><p>Custom bots and server architecture designed for clarity, permissions, and growth.</p><ul><li>Moderation and automation</li><li>Ticketing and economy systems</li><li>Integrations with outside services</li></ul></div>
+        <div class="card"><h3>Hosting &amp; deployment</h3><p>Reliable hosting for bots and applications.</p><ul><li>Process management</li><li>Uptime monitoring</li><li>Deployment pipelines</li></ul></div>
+        <div class="card"><h3>Cloud infrastructure</h3><p>Setups that grow from a single instance to a distributed system without a rebuild.</p><ul><li>Server provisioning</li><li>Environment configuration</li><li>Scaling strategy</li></ul></div>
+        <div class="card y"><h3>Operations &amp; management</h3><p>The human side of technical projects.</p><ul><li>Coordinating team members</li><li>Structuring workflows</li><li>Managing partner relationships</li></ul></div>
+      </div>
+      <div class="btns" style="margin-top:2.5rem"><a class="btn primary" href="#contact">Hire me for a project</a><a class="btn" href="https://github.com/zenithrazor" target="_blank" rel="noopener">See code on GitHub</a></div>
+    </section>
+
+    <section class="view" data-route="experience" hidden>
+      <h2>Works &amp; experience</h2>
+      <p class="sub">Where I’m building and leading right now.</p>
+      <article class="job">
+        <header><h3>Artics</h3><span class="role">Head of Artics</span></header>
+        <p>An influencer marketing agency built on one idea: we create bonds, not promises. Artics pairs brands with creators who want to work together, then builds each campaign around that relationship.</p>
+        <p>Leading it draws on the same operations work I do for clients: coordinating people, structuring workflows, and managing partners.</p>
+        <ul class="tags" aria-label="Services"><li>Creator partnerships</li><li>Campaign strategy</li><li>Brand storytelling</li></ul>
+        <div class="btns"><a class="btn primary" href="#artics">Read about Artics</a><a class="btn" href="https://discord.gg/articsind" target="_blank" rel="noopener">Join the Discord</a></div>
+      </article>
+    </section>
+
+    <section class="view" data-route="artics" hidden>
+      <h2>Artics: we create bonds, not promises.</h2>
+      <p class="sub">An influencer marketing agency that matches brands with creators who trust each other, then builds the campaign around that relationship instead of a script. Artics is building its founding team now.</p>
+      <div class="grid g3">
+        <div class="card y"><h3>Creator partnerships</h3><p>Brands meet creators whose audience already trusts them. Fit comes before reach.</p></div>
+        <div class="card"><h3>Campaign strategy</h3><p>Each campaign follows the creator’s real voice, from first outreach to the final post going live.</p></div>
+        <div class="card y"><h3>Brand storytelling</h3><p>Helping brands say something worth attention instead of something audiences scroll past.</p></div>
+      </div>
+      <div class="stats"><div><b><span data-n="100" style="color:inherit">100</span>%</b><span>creator-first matching</span></div><div><b data-n="3">3</b><span>core services, no filler</span></div><div><b data-n="0">0</b><span>recycled pitch decks</span></div></div>
+      <div class="btns" style="margin-top:2.5rem"><a class="btn primary" href="https://discord.gg/articsind" target="_blank" rel="noopener">Join the Artics Discord</a><a class="btn" href="#contact">Contact me</a></div>
+    </section>
+
+    <section class="view" data-route="contact" hidden>
+      <h2>Let’s build something that stays online.</h2>
+      <p class="sub">International clients welcome. Email is the fastest way to reach me.</p>
+      <a class="mail" href="mailto:contact@zenithrazor.com">contact@zenithrazor.com</a>
+      <div class="btns"><a class="btn" href="https://github.com/zenithrazor" target="_blank" rel="noopener">GitHub</a><a class="btn" href="https://discord.gg/articsind" target="_blank" rel="noopener">Artics on Discord</a></div>
+      <div class="grid" style="margin-top:3rem;align-items:start">
+        <div>
+          <h2 style="font-size:2rem">Write a message</h2>
+          <form id="form"><label>Your name<input id="fn" autocomplete="name" required></label><label>What do you need?<textarea id="fm" required></textarea></label><button class="btn primary" type="submit">Open in my email app</button></form>
+        </div>
+        <div>
+          <h2 style="font-size:2rem">Questions</h2>
+          <details><summary>What do you build?</summary><p>Discord bots and servers, hosting and deployment, cloud infrastructure, and the operations around them.</p></details>
+          <details><summary>Do you work with international clients?</summary><p>Yes. Clients from any region are welcome.</p></details>
+          <details><summary>How do we start?</summary><p>Email me what you’re building. I read every message and reply directly.</p></details>
+          <details><summary>What is Artics?</summary><p>An influencer marketing agency I lead. See the Artics page or join the Discord.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><span>© 2026 ZenithRazor</span><span>Coder &amp; developer · Head of Artics</span></footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var R=document.documentElement,views=[].slice.call(document.querySelectorAll('.view')),
+      links=[].slice.call(document.querySelectorAll('nav a,.menu a[href^="#"],.logo')),
+      dots=document.getElementById('dots'),menu=document.getElementById('menu'),first=true,
+      dark=matchMedia('(prefers-color-scheme: dark)');
+  function isDark(){return R.dataset.theme?R.dataset.theme==='dark':dark.matches}
+  try{var s=localStorage.getItem('zr-theme');if(s)R.dataset.theme=s}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var t=isDark()?'light':'dark';R.dataset.theme=t;try{localStorage.setItem('zr-theme',t)}catch(e){}
+    window.dispatchEvent(new Event('zr-theme'));
+  });
+  var h1=document.querySelector('[data-split]');
+  h1.innerHTML=h1.textContent.split(' ').map(function(w,i){return '<span class="w" style="--i:'+i+'">'+w+'</span>'}).join(' ');
+  function setMenu(o){menu.hidden=!o;dots.setAttribute('aria-expanded',o);dots.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  dots.addEventListener('click',function(e){e.stopPropagation();setMenu(menu.hidden)});
+  document.addEventListener('click',function(e){if(!menu.contains(e.target))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){setMenu(false);dots.focus()}});
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function count(v){[].forEach.call(v.querySelectorAll('[data-n]'),function(el){
+    var n=+el.dataset.n,t0=performance.now();if(still||!n){el.textContent=n;return}
+    (function f(t){var p=Math.min((t-t0)/900,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})}
+  function route(){
+    var r=(location.hash||'#home').slice(1),found=false;
+    views.forEach(function(v){var on=v.dataset.route===r;v.hidden=!on;
+      if(on){found=true;v.classList.remove('enter');void v.offsetWidth;if(!first)v.classList.add('enter');count(v)}});
+    if(!found){location.hash='#home';return}
+    links.forEach(function(a){a.getAttribute('href')==='#'+r?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+    var n={home:'Coder & Developer',about:'About',work:'Work',experience:'Experience',artics:'Artics',contact:'Contact'};
+    document.title='ZenithRazor — '+n[r];window.scrollTo(0,0);setMenu(false);first=false;
+  }
+  window.addEventListener('hashchange',route);route();
+  addEventListener('scroll',function(){var h=R.scrollHeight-innerHeight;document.getElementById('bar').style.width=(h>0?scrollY/h*100:0)+'%'},{passive:true});
+  document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();
+    location.href='mailto:contact@zenithrazor.com?subject='+encodeURIComponent('Project inquiry from '+fn.value)+'&body='+encodeURIComponent(fm.value)});
+
+  /* Shaders: flowing backdrop + wave dots */
+  if(!window.THREE)return;
+  var canvas=document.getElementById('gl'),renderer;
+  try{renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:false,antialias:true})}catch(e){return}
+  var small=Math.min(innerWidth,innerHeight)<700,N=small?55:95,S=.36,pr=Math.min(devicePixelRatio||1,2);
+  renderer.setPixelRatio(pr);
+  var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100);cam.position.set(0,7,15);cam.lookAt(0,0,0);
+  var bu={uTime:{value:0},uRes:{value:new THREE.Vector2(1,1)},uC1:{value:new THREE.Color()},uC2:{value:new THREE.Color()}};
+  var bg=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({uniforms:bu,depthTest:false,depthWrite:false,
+    vertexShader:'void main(){gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader:'uniform float uTime;uniform vec2 uRes;uniform vec3 uC1;uniform vec3 uC2;'+
+    'void main(){vec2 p=gl_FragCoord.xy/uRes;p.x*=uRes.x/uRes.y;p*=2.4;'+
+    'float v=sin(p.x*3.+uTime*.5)+sin(p.y*3.3-uTime*.45)+sin((p.x+p.y)*2.4+uTime*.35)+sin(length(p-vec2(1.8,.9))*5.-uTime*.6);'+
+    'gl_FragColor=vec4(mix(uC1,uC2,smoothstep(-1.,3.,v)),1.);}'}));
+  bg.renderOrder=-1;bg.frustumCulled=false;scene.add(bg);
+  var pos=new Float32Array(N*N*3),k=0;
+  for(var i=0;i<N;i++)for(var j=0;j<N;j++){pos[k++]=(i-N/2)*S;pos[k++]=0;pos[k++]=(j-N/2)*S-4}
+  var geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  var u={uTime:bu.uTime,uMouse:{value:new THREE.Vector2()},uSize:{value:small?1.7:1.5},uA:{value:new THREE.Color()},uB:{value:new THREE.Color()},uAlpha:{value:.7}};
+  function theme(){var d=isDark();
+    bu.uC1.value.set(d?0x12100a:0xfff4b8);bu.uC2.value.set(d?0x2e2606:0xffd60a);
+    u.uA.value.set(d?0xffd60a:0x1d1906);u.uB.value.set(d?0xfff3a0:0x8a6400);u.uAlpha.value=d?.9:.6}
+  theme();window.addEventListener('zr-theme',theme);dark.addEventListener&&dark.addEventListener('change',theme);
+  var pts=new THREE.Points(geo,new THREE.ShaderMaterial({uniforms:u,transparent:true,depthWrite:false,
+    vertexShader:'uniform float uTime;uniform vec2 uMouse;uniform float uSize;varying float vH;'+
+    'void main(){vec3 p=position;float d=distance(p.xz,uMouse);float w=sin(p.x*.55+uTime)*.4+cos(p.z*.45+uTime*.8)*.4;'+
+    'w+=exp(-d*d*.06)*1.7*sin(uTime*2.2-d*1.6);p.y+=w;vH=w;vec4 mv=modelViewMatrix*vec4(p,1.);gl_PointSize=uSize*(26./-mv.z);gl_Position=projectionMatrix*mv;}',
+    fragmentShader:'uniform vec3 uA;uniform vec3 uB;uniform float uAlpha;varying float vH;'+
+    'void main(){float r=length(gl_PointCoord-.5);if(r>.5)discard;gl_FragColor=vec4(mix(uA,uB,smoothstep(-.3,1.4,vH)),smoothstep(.5,.15,r)*uAlpha);}'}));
+  scene.add(pts);
+  function size(){renderer.setSize(innerWidth,innerHeight,false);bu.uRes.value.set(innerWidth*pr,innerHeight*pr);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}
+  size();addEventListener('resize',size);
+  var tx=0,tz=0;addEventListener('pointermove',function(e){tx=(e.clientX/innerWidth-.5)*20;tz=(e.clientY/innerHeight-.35)*14});
+  var clock=new THREE.Clock();
+  function frame(){bu.uTime.value=clock.getElapsedTime();
+    u.uMouse.value.x+=(tx-u.uMouse.value.x)*.08;u.uMouse.value.y+=(tz-u.uMouse.value.y)*.08;
+    renderer.render(scene,cam);if(!still&&!document.hidden)requestAnimationFrame(frame)}
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&!still)requestAnimationFrame(frame)});
+  window.addEventListener('zr-theme',function(){if(still)frame()});
+  frame();
+})();
+</script>
+</body>
+</html>
